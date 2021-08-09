@@ -1,0 +1,28 @@
+* {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+  border: 2px solid black;
+}
+
+nav > ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav > ul > li > a {
+  text-decoration: none;
+}
+
+nav > ul > li > a:hover {
+  color: pink;
+  text-decoration: underline;
+}
+
+header {
+  text-align: center;
+}
