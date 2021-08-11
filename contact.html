@@ -27,19 +27,55 @@
         <a href="mailto:yujinok@gmail.com"> Email Us </a>
       </p>
       <p><a href="tel:0424358191">Call Us</a></p>
+      <h5> Ulternatively, leave your details below, we will get back to you ASAP!</h5>
     </header>
     <main>
-      <div class ="contact-form">
+      <form class ="contact-form" onsubmit= "return submitMessage(event);">
         <label for "email">Email:</label>
-        <input type="text" name="email" id="email"/>
+        <input type="text" name="email" id="email" required/>
         <label for "email">Full Name:</label>
         <input type="text" name="fullName" id="fullName">
         <label for "message">Message:</label>
-        <textarea name="message id="message" rows="3" cols="20"></textarea>
+        <textarea name="message" id="message" rows="3" cols="20" required></textarea>
 
         <button>Clear</button>
         <button>Submit</button>
-      </div>
+        <input type ="submit" value="submit">
+      </form>
+
+      <script>
+       
+      function submitMessage(event){
+        event.preventDefault();
+     
+
+      const email=document.getElementById("email").value;
+      const fullName=document.getElementById("fullName").value;
+      const message=document.getElementById("message").value;
+
+      const messageObject={
+        email,
+        fullName,
+        message,
+      };
+  
+
+      let currentMessages =[];
+      if (window.sessionStorage.getItem("messages")){
+        currentMessage= JSON.parse(
+          window.sessionStorage.getItem("messages")
+        );
+      }
+
+      currentMessages.push(messageObject);
+      window.sessionStorage.setItem(
+        "messages",
+        JSON.stringify(currentMessages)
+      );
+    
+  }
+    
+      </script>
     </main>
   </body>
 </html>
