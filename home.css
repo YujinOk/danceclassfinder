@@ -16,3 +16,6 @@ main > .gallery > img {
   border: 1px solid white;
   border-radius: 10px;
 }
+body {
+  background-color: lightpink;
+}

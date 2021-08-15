@@ -29,40 +29,66 @@
       <p><a href="tel:0424358191">Call Us</a></p>
       <h5> Ulternatively, leave your details below, we will get back to you ASAP!</h5>
     </header>
+
     <main>
       <form class ="contact-form" onsubmit= "return submitMessage(event);">
         <label for "email">Email:</label>
         <input type="text" name="email" id="email" required/>
         <label for "email">Full Name:</label>
         <input type="text" name="fullName" id="fullName">
-        <label for "message">Message:</label>
-        <textarea name="message" id="message" rows="3" cols="20" required></textarea>
-
+        <label for="feebackType">Feedback Type:</label>
+        <select name="feedbackType" id="feedbackType">
+          <option value="review">Review</option>
+          <option value=" complaint">Complaint</option>
+          <option value="event">Book Event</option>
+          </select>
+          <label for="comment">Comment:</label>
+          <textarea name="comment" id="comment" rows="3" cols="30" required>
+  Leave your comment here
+  </textarea
+          >
         <button>Clear</button>
-        <button>Submit</button>
         <input type ="submit" value="submit">
       </form>
+    </main>
 
+    <footer>
+      <div class="form-title-section"> 
+        <button onclick="deleteMessages();">Clear Messages</button>
+      </div>
+
+      <div class="form">
+        <dl id="currentMessages"></dl>
+      </div>
+      
       <script>
+         function deleteMessages() {
+        if (window.sessionStorage.getItem("messages")) {
+          window.sessionStorage.removeItem("messages");
+        }
+        renderMessages();
+      }
        
       function submitMessage(event){
         event.preventDefault();
      
 
-      const email=document.getElementById("email").value;
-      const fullName=document.getElementById("fullName").value;
-      const message=document.getElementById("message").value;
+        const email = document.getElementById("email").value;
+        const fullName = document.getElementById("fullName").value;
+        const feedbackType = document.getElementById("feedbackType").value;
+        const comment = document.getElementById("comment").value;
 
-      const messageObject={
-        email,
-        fullName,
-        message,
-      };
+        const messageObject = {
+          email,
+          fullName,
+          feedbackType,
+          comment,
+        };
   
 
       let currentMessages =[];
       if (window.sessionStorage.getItem("messages")){
-        currentMessage= JSON.parse(
+        currentMessages= JSON.parse(
           window.sessionStorage.getItem("messages")
         );
       }
@@ -73,9 +99,34 @@
         JSON.stringify(currentMessages)
       );
     
+      renderMessages();    
   }
-    
+    function renderMessages(){
+      let currentMessages=[];
+      if (window.sessionStorage.getItem("messages")){
+        currentMessages= JSON.parse(
+          window.sessionStorage.getItem("messages")
+        );
+      }
+
+      let listItems =[];
+      for(let i = 0; i< currentMessages.length; i++){
+        let listItems = [];
+        for (let i = 0; i < currentMessages.length; i++) {
+          let listItem = " ";
+          const currentMessage = currentMessages[i];
+          listItem += `<dt>${currentMessage.fullName} - ${currentMessage.email}</dt>`; // template string allows to have variable inside of string
+          listItem += `<dd>${currentMessage.feedbackType}: ${currentMessage.comment}</dd>;`;
+          listItem += `<br/>`;
+          listItems.push(listItem);
+      }
+      let descList = document.getElementById("currentMessages");
+        descList.innerHTML = listItems.join("");
+
+    }
+ renderMessages();
       </script>
-    </main>
+
+   
   </body>
 </html>
