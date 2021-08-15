@@ -23,13 +23,18 @@ footer > .form-title-section > button {
   display: flex;
   justify-content: center;
 }
-
+#clear-button {
+  padding: 0px;
+  margin: 2px;
+}
 .form-wrapper {
   text-align: center;
   margin-bottom: 40px;
   justify-content: center;
 }
 
-#submit-button {
+.submitbutton {
+  grid-column-start: 2;
   width: 100%;
+  grid-column-end: 2;
 }
